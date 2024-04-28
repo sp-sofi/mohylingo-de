@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from "@react-navigation/native";
+import { HomeStack } from "./navigation/stack";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {UserProvider} from "./core/containers/UserProvider";
+import { useFonts } from "expo-font";
+const Kodchasan = require('./assets/fonts/Kodchasan-Regular.ttf');
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    const queryClient = new QueryClient();
+    const [loaded] = useFonts({
+        Kodchasan,
+    });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    return !loaded ? null :(
+        <QueryClientProvider client={queryClient}>
+            <UserProvider>
+                <NavigationContainer>
+                    <HomeStack />
+                </NavigationContainer>
+            </UserProvider>
+        </QueryClientProvider>
+    );
+}
