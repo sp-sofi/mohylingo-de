@@ -36,13 +36,23 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontFamily: 'Kodchasan',
     },
-    button: {
+    roundedButton: {
         width: 132,
         height: 132,
         borderRadius: 66,
         backgroundColor: '#FFF7AD',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    button: {
+        width: 200,
+        height: 132,
+        borderRadius: 10,
+        backgroundColor: '#FFF7AD',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 15,
+        paddingHorizontal: 10,
     },
     buttonText: {
         fontSize: 32,
@@ -65,7 +75,6 @@ const LoginScreen = () => {
         mutationFn: (credentials) => axios.post(`${BASE_API_URL}/login/`, credentials),
         onSuccess: (data) => {
             // Handle success, e.g., store auth tokens, navigate
-            console.log(data.data.token);
             storeToken(data.data.token);
             setUser({
                 user_id: data.data.user_id,
@@ -108,11 +117,11 @@ const LoginScreen = () => {
                         onChangeText={setPassword}
                     />
                 </View>
-                <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <TouchableOpacity style={styles.roundedButton} onPress={handleLogin}>
                     <Text style={styles.buttonText}>IN</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Sign Up")}>
-                    <Text style={styles.buttonText}>Sing UP</Text>
+                    <Text style={styles.buttonText}>Sign UP</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

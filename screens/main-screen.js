@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native';
-import {LinearGradient} from "expo-linear-gradient";
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
 import TopicList from "../core/components/topic-list";
-import {useNavigation} from "@react-navigation/native";
-import {useQuery} from "@tanstack/react-query";
+import { useNavigation } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import {BASE_API_URL} from "../core/constants";
-import {useUser} from "../core/containers/UserProvider";
+import { BASE_API_URL } from "../core/constants";
+import { useUser } from "../core/containers/UserProvider";
+import Loader from '../core/components/Loader';
 
 
 const styles= StyleSheet.create({
@@ -68,22 +69,25 @@ const styles= StyleSheet.create({
 
 const MainScreen = () => {
     const navigation = useNavigation();
-    const { token } = useUser();
+    const { token, user } = useUser();
 
-    const { isLoading, isError: isUserProgressError, data: userProgress, error: userProgressError } = useQuery({
+    const { isLoading, data: userProgress} = useQuery({
         queryKey: ['userProgress'],
         queryFn: () => axios.get(
             `${BASE_API_URL}/userProgress/`,
             {headers: {
-                    'Authorization': `Token ${token}`,
-                }}),
+                'Authorization': `Token ${token}`,
+            }}
+        ),
     });
 
-    console.log(userProgress?.data);
+    const topicProgress = userProgress?.data?.topic_progresses || [];
 
-    return isLoading ? null : (
+    return isLoading ? (
+        <Loader />
+    ) : (
         <View style={styles.container}>
-            <Text style={styles.sIcon}>Hello, Sofia</Text>
+            <Text style={styles.sIcon}>Hello, {user?.username}</Text>
             <View style={styles.tabButtons}>
                 <TouchableOpacity style={styles.tabButton}>
                     <LinearGradient
@@ -111,8 +115,10 @@ const MainScreen = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.contentRow}>
-                <TouchableOpacity style={[styles.contentButton, { backgroundColor: '#FFBBF8' }, { marginRight: 20 }]}
-                                  onPress={(()=>navigation.navigate("Messenger"))}>
+                <TouchableOpacity
+                    style={[styles.contentButton, { backgroundColor: '#FFBBF8' }, { marginRight: 20 }]}
+                    onPress={() => navigation.navigate("Messenger")}
+                >
                     <Text style={styles.emoji}>😉</Text>
                     <Text style={styles.contentButtonText}>Let's{' \n'} talk</Text>
                 </TouchableOpacity>
@@ -121,7 +127,7 @@ const MainScreen = () => {
                     <Text style={styles.contentButtonText}>  Learn{' \n'}   new</Text>
                 </TouchableOpacity>
             </View>
-            <TopicList/>
+            <TopicList topics={topicProgress} />
         </View>
     );
 };
