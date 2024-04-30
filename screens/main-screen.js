@@ -1,10 +1,9 @@
 import React from 'react';
+import axios from "axios";
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { LinearGradient } from "expo-linear-gradient";
 import TopicList from "../core/components/topic-list";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { BASE_API_URL } from "../core/constants";
 import { useUser } from "../core/containers/UserProvider";
 import Loader from '../core/components/Loader';

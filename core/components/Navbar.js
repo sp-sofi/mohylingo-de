@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     sIcon: {
         fontSize: 28,
         color: '#4F009F',
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         fontFamily: 'Kodchasan',
         marginBottom: 18,
     },
@@ -54,13 +54,18 @@ const Navbar = ({
                         <Text style={styles.tabButtonText}>Tutorial</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.tabButton, { backgroundColor: '#FFBBF8' }]}>
+                <TouchableOpacity
+                    style={[styles.tabButton, { backgroundColor: '#FFBBF8' }]}
+                    onPress={() => navigation.navigate("Main")}
+                >
                     <View style={styles.tabButtonGradient}>
                         <Text style={styles.tabButtonText}>Main</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.tabButton}
-                                  onPress={() => navigation.navigate("Profile")}>
+                <TouchableOpacity
+                    style={styles.tabButton}
+                    onPress={() => navigation.navigate("Profile")}
+                >
                     <LinearGradient
                         colors={['#FFF7AD', '#FFA9F9']}
                         style={styles.tabButtonGradient}
