@@ -8,6 +8,7 @@ import axios from "axios";
 import { BASE_API_URL } from "../core/constants";
 import { useUser } from "../core/containers/UserProvider";
 import Loader from '../core/components/Loader';
+import Navbar from "../core/components/Navbar";
 
 
 const styles= StyleSheet.create({
@@ -23,27 +24,7 @@ const styles= StyleSheet.create({
         fontFamily: 'Kodchasan',
         marginBottom: 18,
     },
-    tabButtons: {
-        flexDirection: 'row',
-        justifyContent: 'space-between', // Ensure space between buttons
-        marginBottom: 16, // Adjust as needed
-    },
-    tabButton: {
-        height: 45,
-        width: 123,
-        borderRadius: 100,
-        overflow: 'hidden',
-    },
-    tabButtonText: {
-        color: '#4F009F',
-        fontSize: 18,
-        fontFamily: 'Kodchasan',
-    },
-    tabButtonGradient: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+
     contentRow: {
         flexDirection: 'row',
         marginBottom: 32,
@@ -87,33 +68,7 @@ const MainScreen = () => {
         <Loader />
     ) : (
         <View style={styles.container}>
-            <Text style={styles.sIcon}>Hello, {user?.username}</Text>
-            <View style={styles.tabButtons}>
-                <TouchableOpacity style={styles.tabButton}>
-                    <LinearGradient
-                        colors={['#FFF7AD', '#FFA9F9']}
-                        start={{x: 0, y: 0}}
-                        end={{x: 1, y: 0}}
-                        style={styles.tabButtonGradient}
-                    >
-                        <Text style={styles.tabButtonText}>Tutorial</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.tabButton, { backgroundColor: '#FFBBF8' }]}>
-                    <View style={styles.tabButtonGradient}>
-                        <Text style={styles.tabButtonText}>Main</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.tabButton}>
-                    <LinearGradient
-                        colors={['#FFF7AD', '#FFA9F9']}
-                        style={styles.tabButtonGradient}
-                        start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                    >
-                        <Text style={styles.tabButtonText}>Profile</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-            </View>
+            <Navbar title={`Hello, ${user?.username}`} />
             <View style={styles.contentRow}>
                 <TouchableOpacity
                     style={[styles.contentButton, { backgroundColor: '#FFBBF8' }, { marginRight: 20 }]}
