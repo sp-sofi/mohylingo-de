@@ -67,8 +67,6 @@ const TopicQuestionsLearn = () => {
     const { topicId, topicProgressId } = route.params;
     const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
 
-    console.log(topicId, topicProgressId);
-
     const { isLoading: questionsLoading, data: questions } = useQuery({
         queryKey: ['nonLearnedQuestions'],
         queryFn: () => axios.get(
@@ -101,9 +99,6 @@ const TopicQuestionsLearn = () => {
 
     const currentQuestion = questions?.length <= currentQuestionIndex ? questions?.data[currentQuestionIndex] : null;
     const isLoading = questionsLoading || topicProgressLoading;
-
-    console.log(topicProgress, 'topicProgress', 'lol');
-    console.log(questions, 'questions');
 
     return isLoading ? (
         <Loader />

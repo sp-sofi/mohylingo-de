@@ -75,7 +75,6 @@ const LoginScreen = () => {
         mutationFn: (credentials) => axios.post(`${BASE_API_URL}/login/`, credentials),
         onSuccess: (data) => {
             // Handle success, e.g., store auth tokens, navigate
-            console.log(data.data.token);
             storeToken(data.data.token);
             setUser({
                 user_id: data.data.user_id,
