@@ -3,29 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react
 import Topic from "./topic";
 
 
-const data = [
-    { id: '1', topic: 'Family', progress: '12/24', color: '#FFBBF8' },
-    { id: '2', topic: 'Work', progress: '8/20', color: '#FFF7AD' },
-    // Add more topics as needed
-];
-
-const TopicList = () => {
-    const renderTopic = ({item}) => {
-        return <Topic id={item.id} topic={item.topic} progress={item.progress}></Topic>
-    }
-
-    return (
-        <View >
-            <Text style={styles.topicsInProgress}>Topics in progress</Text>
-            <FlatList
-                data={data}
-                keyExtractor={(item) => item.id}
-                renderItem={ renderTopic }
-            />
-        </View>
-    );
-}
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -69,4 +46,29 @@ const styles = StyleSheet.create({
 
     },
 });
+
+const renderTopic = ({item}) => {
+    return (
+        <Topic topic={{
+            ...item,
+            ...item?.topic,
+            id: item?.topic?.id,
+            progress_id: item?.id,
+        }} />
+    );
+};
+
+const TopicList = ({ topics }) => {
+    return (
+        <View>
+            <Text style={styles.topicsInProgress}>Topics in progress</Text>
+            <FlatList
+                data={topics}
+                keyExtractor={(item) => item.id}
+                renderItem={renderTopic}
+            />
+        </View>
+    );
+};
+
 export default TopicList;
