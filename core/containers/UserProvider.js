@@ -33,6 +33,11 @@ export const UserProvider = ({
     const [token, setToken] = useState('');
     const [user, setUser] = useState(null);
 
+    // const [token, setToken] = useState('3db90601b9e2c43ad6eef233f3876292af864f94');
+    // const [user, setUser] = useState(
+    //     {"user_id": 10, "username": "Kyla_Kemmer"}
+    // );
+
     const value = {
         ...initialValue,
         user,

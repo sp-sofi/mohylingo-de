@@ -44,7 +44,10 @@ const Navbar = ({
         <View>
             <Text style={styles.sIcon}>{title}</Text>
             <View style={styles.tabButtons}>
-                <TouchableOpacity style={styles.tabButton}>
+                <TouchableOpacity
+                    style={styles.tabButton}
+                    onPress={() => navigation.navigate("Tutorial")}
+                >
                     <LinearGradient
                         colors={['#FFF7AD', '#FFA9F9']}
                         start={{x: 0, y: 0}}

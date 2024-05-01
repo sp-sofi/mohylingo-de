@@ -5,6 +5,7 @@ import TopicQuestionsLearn from "../screens/topic-questions-learn";
 import MessengerScreen from "../screens/messenger";
 import SignupScreen from "../screens/signup-screen";
 import ProfileScreen from "../screens/profile-screen";
+import TutorialScreen from '../screens/tutorial-screen';
 
 const Stack = createStackNavigator();
 
@@ -17,8 +18,7 @@ export const HomeStack = () => {
             <Stack.Screen name="Messenger" component={MessengerScreen} />
             <Stack.Screen name="Sign Up" component={SignupScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
-
-            {/*<Stack.Screen name="Settings" component={Settings} />*/}
+            <Stack.Screen name="Tutorial" component={TutorialScreen} />
         </Stack.Navigator>
     );
 }
