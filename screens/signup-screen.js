@@ -88,7 +88,7 @@ const SignupScreen = () => {
     } = useUser();
     const navigation = useNavigation();
 
-    const { mutate } = useMutation({
+    const { mutate, error } = useMutation({
         mutationFn: (credentials) => axios.post(`${BASE_API_URL}/users/`, credentials),
         onSuccess: (data) => {
             // Handle success, e.g., store auth tokens, navigate

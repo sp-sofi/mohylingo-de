@@ -101,7 +101,11 @@ const TopicQuestionsLearn = () => {
     });
 
     const { mutate } = useMutation({
-        mutationFn: (credentials) => axios.put(`${BASE_API_URL}/topicProgress/${topicProgressId}/learnQuestion/`, credentials),
+        mutationFn: (credentials) => axios.put(`${BASE_API_URL}/topicProgress/${topicProgressId}/learnQuestion/`, credentials, {
+            headers: {
+                'Authorization': `Token ${token}`,
+            },
+        }),
         onSuccess: () => {
             setSelectedOption(null);
             setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -122,9 +126,6 @@ const TopicQuestionsLearn = () => {
     const validateAnswer = () => {
         const correctAnswer = +currentQuestion?.answer;
         const isCorrect = +selectedOption === correctAnswer;
-        console.log(isCorrect, 'isCorrect');
-        console.log(selectedOption, 'selectedOption');
-        console.log(correctAnswer, 'correctAnswer');
 
         if (isCorrect)
             mutate({ question_id: currentQuestion?.id });
@@ -152,7 +153,7 @@ const TopicQuestionsLearn = () => {
                                 colors={['#FFF7AD', '#FFA9F9']}
                                 start={{x: 0, y: 0}}
                                 end={{x: 1, y: 0}}
-                                style={{ borderRadius: 40, marginVertical: 10, padding: 5, margin: 10 }} // Update this line
+                                style={{ borderRadius: 40, marginVertical: 10, padding: 5, margin: 10 }}
                             >
                                 <TouchableOpacity
                                     style={{...styles.contentButton, backgroundColor: selectedOption === item.id ? 'transparent' : 'white' }}

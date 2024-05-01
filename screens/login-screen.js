@@ -91,9 +91,8 @@ const LoginScreen = () => {
     };
 
     useEffect(() => {
-        if (token && user) {
+        if (token && user)
             navigation.navigate('Main');
-        }
     }, [token, user]);
 
     return (
