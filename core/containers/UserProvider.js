@@ -33,10 +33,17 @@ export const UserProvider = ({
     const [token, setToken] = useState('');
     const [user, setUser] = useState(null);
 
+    const logout = async () => {
+        await storeToken('');
+        setToken('');
+        setUser(null);
+    };
+
     const value = {
         ...initialValue,
         user,
         token,
+        logout,
         setUser,
         storeToken,
     };

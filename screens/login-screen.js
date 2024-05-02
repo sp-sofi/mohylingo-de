@@ -96,6 +96,9 @@ const LoginScreen = () => {
         }
     }, [token, user]);
 
+
+    console.log(error)
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
